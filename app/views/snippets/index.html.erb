@@ -1,0 +1,15 @@
+<h1>All Snippets</h1>
+
+<div class="row">
+	<div class="col-md-6">
+		<% if @snippets.empty?%>
+			<p> No snippets found!</p>
+		<% else %>
+			<% @snippets.each do |snippet|%>
+				<blockquote><p><%= link_to snippet.title, snippet_path(snippet)%></p>
+				<footer>by: <%= snippet.snippet_owner(snippet)%>, tags: <%= raw snippet.tag_list.map {|a| link_to a, tag_path(a)}.join(', ')%></footer></blockquote>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+</div>

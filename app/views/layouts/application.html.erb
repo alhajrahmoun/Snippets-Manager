@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snippets Manager</title>
+  <%= stylesheet_link_tag    'application' %>
+  <%= javascript_include_tag 'application','loadmode','meta', 'multiplex' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+		<nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <% if user_signed_in? %>
+          <a class="navbar-brand" href="<%= snippets_path%>">Snippets Manager</a>
+          <% else %>
+          <a class="navbar-brand" href="<%= root_path%>">Snippets Manager</a>
+          <% end %>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+            <li><%= link_to "New Snippet", new_snippet_path, class: "active" %></li>
+            <li><%= link_to "Sign out", sign_out_path %></li>
+          <% end %>
+          </ul>
+        <!--/.nav-collapse -->
+      <% if user_signed_in?%>
+      <%= form_tag snippets_path, method: :get, class: 'navbar-form navbar-right' do  %>
+      <div class="input-append">
+        <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'search' %>
+      </div>
+
+      <% end %>
+      <% end %>
+      </div>
+      </div>
+    </nav>
+
+	<div class="container">
+	
+		<%= yield %>
+
+	</div>
+</body>
+</html>

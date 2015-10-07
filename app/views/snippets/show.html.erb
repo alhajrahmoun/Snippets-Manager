@@ -1,0 +1,10 @@
+
+
+<h3><%= @snippet.title%> <small><%= link_to "Edit", edit_snippet_path(@snippet) %>, <%= link_to "Delete", snippet_path(@snippet), method: :delete, data: { confirm: 'Are you sure?' } %></small></h3>
+<h4>by: <%= @snippet.snippet_owner(@snippet)%></h4>
+<h4>-Tags: <%= raw @snippet.tag_list.map {|tag| link_to tag, tag_path(tag)}.join(', ') %></h4><br />
+<%= text_area_tag 'snippet_show', @snippet.body %><br />
+
+<%= content_tag :div, id: "snippet_mode", data: {mode: @snippet.mode} do %>
+<% end %>
+
